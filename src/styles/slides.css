@@ -1,0 +1,232 @@
+@import './tokens.css';
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-body);
+  color: var(--color-gray-700);
+  background: var(--color-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ── App layout ── */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.slides-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Slide base ── */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+              transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.slide--dark {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.slide--light {
+  background: var(--color-gray-100);
+  color: var(--color-gray-800);
+}
+
+/* ── Header bar — BMW style: no colored bar, just clean text on bg ── */
+.slide-header {
+  padding: 48px 56px 16px;
+}
+
+.slide-header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.slide-header .subtitle {
+  font-style: normal;
+  opacity: 0.55;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Dark header variant */
+.slide-header--dark {
+  background: transparent;
+  color: var(--color-white);
+}
+.slide-header--dark .subtitle {
+  color: var(--color-gray-400);
+}
+
+/* Light header variant — used on dark slides as a subtle band */
+.slide-header--teal {
+  background: transparent;
+  color: var(--color-white);
+}
+.slide-header--teal .subtitle {
+  color: var(--color-gray-400);
+}
+
+/* ── Staggered children reveal — smoother, BMW-like ── */
+.slide.active .stagger > * {
+  animation: fadeUp 0.55s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+.slide.active .stagger > *:nth-child(1) { animation-delay: 0.06s; }
+.slide.active .stagger > *:nth-child(2) { animation-delay: 0.12s; }
+.slide.active .stagger > *:nth-child(3) { animation-delay: 0.18s; }
+.slide.active .stagger > *:nth-child(4) { animation-delay: 0.24s; }
+.slide.active .stagger > *:nth-child(5) { animation-delay: 0.30s; }
+.slide.active .stagger > *:nth-child(6) { animation-delay: 0.36s; }
+.slide.active .stagger > *:nth-child(7) { animation-delay: 0.42s; }
+.slide.active .stagger > *:nth-child(8) { animation-delay: 0.48s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Glass card — BMW-revised: dark panel, subtle border ── */
+.glass-card {
+  background: var(--color-gray-900);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 28px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* ── Light card — BMW clean white ── */
+.light-card {
+  background: var(--color-white);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.light-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ── Bottom nav — minimal BMW style ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 100;
+}
+
+.bottom-nav button {
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(8px);
+}
+
+.bottom-nav button:hover {
+  border-color: var(--color-white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.bottom-nav button:disabled {
+  opacity: 0.2;
+  cursor: default;
+  border-color: rgba(255, 255, 255, 0.1);
+  background: transparent;
+}
+
+.slide-counter {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  user-select: none;
+}
+
+/* Light slide overrides for bottom nav */
+.slide--light ~ .bottom-nav button,
+.app-layout:has(.slide--light.active) .bottom-nav button {
+  border-color: rgba(0, 0, 0, 0.15);
+  color: var(--color-gray-800);
+}
+.app-layout:has(.slide--light.active) .bottom-nav button:hover {
+  border-color: var(--color-gray-800);
+  background: rgba(0, 0, 0, 0.04);
+}
+.app-layout:has(.slide--light.active) .slide-counter {
+  color: var(--color-gray-400);
+}
+
+/* ── Accent line on top of card — thinner, BMW blue ── */
+.accent-top {
+  position: relative;
+}
+.accent-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 8px 8px 0 0;
+}
+
+/* ── Scrollbar — minimal ── */
+.slide::-webkit-scrollbar { width: 4px; }
+.slide::-webkit-scrollbar-track { background: transparent; }
+.slide::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+.slide--light::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); }

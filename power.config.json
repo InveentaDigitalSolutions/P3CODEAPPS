@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "appId": "07f8f5d3-14d7-4e9a-ad9d-21ed796dd38e",
+  "appDisplayName": "Code Apps Presentation",
+  "region": "prod",
+  "environmentId": "94283d50-c20e-e585-aade-876895af0d0d",
+  "description": "Power Apps Code Apps presentation",
+  "buildPath": "./dist",
+  "buildEntryPoint": "index.html",
+  "localAppUrl": "http://localhost:3000",
+  "logoPath": "Default",
+  "connectionReferences": {},
+  "databaseReferences": {}
+}

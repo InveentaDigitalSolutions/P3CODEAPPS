@@ -1,0 +1,38 @@
+:root {
+  /* BMW-inspired palette — true blacks, stark whites, minimal accent */
+  --color-black: #1C1C1C;
+  --color-black-deep: #000000;
+  --color-gray-900: #262626;
+  --color-gray-800: #333333;
+  --color-gray-700: #4A4A4A;
+  --color-gray-400: #999999;
+  --color-gray-300: #BBBBBB;
+  --color-gray-100: #F2F2F2;
+  --color-white: #FFFFFF;
+  --color-accent: #1B69D4;        /* BMW blue — used sparingly */
+  --color-accent-light: #4A90E2;
+  --color-success: #1DB954;
+  --color-danger: #E53935;
+  --color-opportunity: #1B69D4;
+  --color-threat: #F5A623;
+
+  /* SWOT backgrounds — very subtle */
+  --color-strength-bg: #F0FAF4;
+  --color-weakness-bg: #FEF2F2;
+  --color-opportunity-bg: #EEF4FD;
+  --color-threat-bg: #FFFBEB;
+
+  /* Typography — clean geometric sans-serif */
+  --font-heading: 'Sora', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  /* Transitions — smooth, premium */
+  --transition-fast: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-medium: 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-slow: 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Shadows — subtle, diffuse */
+  --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.12);
+  --shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.16);
+}
